@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pick Your Settings</h1>
+
+    <div id="question1">
+        <p>Is it sanitary on Depal 5?</p>
+        <button onclick="answerQuestion1('yes')">Yes</button>
+        <button onclick="answerQuestion1('no')">No</button>
+    </div>
+
+    <div id="question2" class="hidden">
+        <p>Is it sanitary on Depal 6?</p>
+        <button onclick="answerQuestion2('yes')">Yes</button>
+        <button onclick="answerQuestion2('no')">No</button>
+    </div>
+
+    <div id="result" class="hidden">
+        <h2>Your Result</h2>
+        <p id="resultText"></p>
+    </div>
+
+    <script>
+        let answer1 = '';
+        let answer2 = '';
+
+        function answerQuestion1(answer) {
+            answer1 = answer;
+            document.getElementById('question1').classList.add('hidden');
+            document.getElementById('question2').classList.remove('hidden');
+        }
+
+        function answerQuestion2(answer) {
+            answer2 = answer;
+            document.getElementById('question2').classList.add('hidden');
+            showResult();
+        }
+
+        function showResult() {
+            let resultText = '';
+            if (answer1 === 'yes' && answer2 === 'yes') {
+                resultText = 'Setting: 05_06_PullTop_Bad';
+            } else if (answer1 === 'yes' && answer2 === 'no') {
+                resultText = 'Setting: 05_PullTop 06_Sanitary_Bad';
+            } else if (answer1 === 'no' && answer2 === 'yes') {
+                resultText = 'Setting: 05_ Sanitary_06_ PullTop _Bad';
+            } else {
+                resultText = 'Setting: 05_06_Sanitary_Bad';
+            }
+
+            document.getElementById('resultText').innerText = resultText;
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
